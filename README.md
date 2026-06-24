@@ -1,33 +1,33 @@
 # carvs.io
 
-Landing page da [Carvs Tech Consulting](https://carvs.io).
+Landing page for [Carvs Tech Consulting](https://carvs.io).
 
 ## Stack
 
-- **Frontend:** HTML estático com assets otimizados
-- **Container:** Docker com nginx:alpine
-- **Rede:** Docker network isolada (`media`)
-- **Exposição:** Cloudflare Tunnel (sem porta aberta no servidor)
-- **DNS/SSL:** Cloudflare (SSL automático, CNAME flattening no apex)
+- **Frontend:** Static HTML with optimized assets
+- **Container:** Docker with nginx:alpine
+- **Network:** Isolated Docker network (`media`)
+- **Exposure:** Cloudflare Tunnel (no open ports on the server)
+- **DNS/SSL:** Cloudflare (automatic SSL, CNAME flattening on apex)
 
-## Infraestrutura
+## Infrastructure
 
 ```
 Internet → Cloudflare (SSL + CDN)
              ↓
       Cloudflare Tunnel
              ↓
-   [cloudflared container]  ←→  rede Docker: media
+   [cloudflared container]  ←→  Docker network: media
              ↓
      [carvs-site container]
         nginx:alpine :80
 ```
 
-## Como rodar localmente
+## Running locally
 
 ```bash
 docker build -t carvs-site .
 docker run -p 8080:80 carvs-site
 ```
 
-Acesse: http://localhost:8080
+Open: http://localhost:8080
